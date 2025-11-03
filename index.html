@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durbek Hayotbekov - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="uz" title="O'zbekcha">
+            <span class="flag flag-uz"></span>
+            <span class="lang-text">UZ</span>
+        </button>
+        <button class="lang-btn" data-lang="en" title="English">
+            <span class="flag flag-en"></span>
+            <span class="lang-text">EN</span>
+        </button>
+        <button class="lang-btn" data-lang="ru" title="Русский">
+            <span class="flag flag-ru"></span>
+            <span class="lang-text">RU</span>
+        </button>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider">
+                <span class="sun">☀️</span>
+                <span class="moon">🌙</span>
+            </span>
+        </label>
+    </div>
+
+    <!-- Falling Code Background (Dark Mode Only) -->
+    <div id="code-rain" class="code-rain"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="profile-image-container">
+                    <div class="profile-image-placeholder">
+                        <img src="https://github.com/durbekh.png" alt="Durbek Hayotbekov" class="profile-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="profile-placeholder-text">
+                            <span>📷</span>
+                            <p data-key="profile-placeholder">Rasm qo'shing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-text">
+                    <h1 class="name" data-key="name">Durbek Hayotbekov</h1>
+                    <p class="title" data-key="title">Full Stack Developer</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <h2 data-key="about-title">Haqimda</h2>
+            <p class="about-text" data-key="about-text">
+                Men backend yo'nalishida ishlayotgan dasturchiman. Web ilovalar yaratish va ma'lumotlar bazasi bilan ishlashga qiziqaman. 
+                Hozirda IT sohasini o'rganmoqdaman va yaxshi dasturchi bo'lishga intilmoqdaman. Python dasturlash tilida yaxshi tajribaga egaman 
+                va Flask, FastAPI kabi frameworklardan foydalanishni bilaman. Ma'lumotlar bazasi bilan ishlashda SQLite va PostgreSQL ishlataman.
+            </p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong data-key="age-label">Yosh:</strong>
+                    <span data-key="age-value">Dasturlashni o'rganishda</span>
+                </div>
+                <div class="info-item">
+                    <strong data-key="location-label">Manzil:</strong>
+                    <span data-key="location-value">O'zbekiston</span>
+                </div>
+                <div class="info-item">
+                    <strong data-key="education-label">Ta'lim:</strong>
+                    <span data-key="education-value">IT sohasi bo'yicha o'qiyapman</span>
+                </div>
+                <div class="info-item">
+                    <strong data-key="interest-label">Qiziqish:</strong>
+                    <span data-key="interest-value">Backend Development</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2 data-key="skills-title">Texnologiyalar</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 data-key="frontend-title">Frontend</h3>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3 data-key="backend-title">Backend</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>Flask</li>
+                        <li>FastAPI</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3 data-key="database-title">Ma'lumotlar bazasi</h3>
+                    <ul>
+                        <li>SQLite</li>
+                        <li>PostgreSQL</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3 data-key="tools-title">Asboblar</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>Terminal</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <h2 data-key="projects-title">Loyihalar</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 data-key="project1-title">Telegram Bot</h3>
+                    <p data-key="project1-desc">Rasm yuborilganda uning Telegram ID sini qaytaruvchi oddiy telegram bot.</p>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Aiogram</span>
+                </div>
+                <div class="project-card">
+                    <h3 data-key="project2-title">Kitob Bot</h3>
+                    <p data-key="project2-desc">Boshlang'ich darajadagi kitob bot - kitoblar bilan ishlash uchun yaratilgan.</p>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Telegram Bot</span>
+                </div>
+                <div class="project-card">
+                    <h3 data-key="project3-title">Algoritmik Masalalar</h3>
+                    <p data-key="project3-desc">Yozgan barcha kodlarimni joylashtirgan repository. Algoritmik masalalarni yechish.</p>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Algorithms</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Section -->
+        <section class="github-section">
+            <h2 data-key="github-title">GitHub</h2>
+            <p class="github-desc" data-key="github-desc">Barcha loyihalarim GitHubda joylashgan. Profilimga kirib ko'ring va yulduzcha qo'shing!</p>
+            <a href="https://github.com/durbekh" target="_blank" class="github-link" data-key="github-link">
+                <span>🔗</span> github.com/durbekh
+            </a>
+            <div class="github-stats">
+                <div class="stat-card">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label" data-key="repos-label">Repository</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1+</span>
+                    <span class="stat-label" data-key="years-label">Yil Tajriba</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience-section">
+            <h2 data-key="experience-title">Tajriba</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date" data-key="exp1-date">2024 - Hozirgacha</div>
+                    <div class="timeline-content">
+                        <h3 data-key="exp1-title">O'quvchi / Dasturchi</h3>
+                        <p data-key="exp1-desc">Backend dasturlash yo'nalishida o'qiyapman va mustaqil loyihalar yaratmoqdaman. Python, Flask, FastAPI va ma'lumotlar bazasi bilan ishlayman.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" data-key="exp2-date">2024</div>
+                    <div class="timeline-content">
+                        <h3 data-key="exp2-title">Telegram Botlar Yaratish</h3>
+                        <p data-key="exp2-desc">Aiogram framework yordamida turli xil telegram botlar yaratdim. Kitob bot, rasm ID bot va boshqa foydali botlar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 data-key="contact-title">Bog'lanish</h2>
+            <h3 class="contact-me-subtitle" data-key="contact-me-title">Men bilan bog'lanish</h3>
+            <p class="contact-text" data-key="contact-text">
+                Agar sizda savollar bo'lsa yoki hamkorlikni istasangiz, GitHub orqali bog'laning. Men doimo yangi loyihalar va hamkorliklar uchun ochiqman!
+            </p>
+            <div class="contact-options">
+                <!-- Contact Form -->
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="fullname" data-key="form-name-label">Ism va Familiya</label>
+                        <input type="text" id="fullname" name="fullname" required data-key="form-name-placeholder" placeholder="Ism va Familiya">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-key="form-email-label">Email</label>
+                        <input type="email" id="email" name="email" required data-key="form-email-placeholder" placeholder="Email manzilingiz">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-key="form-message-label">Xabar</label>
+                        <textarea id="message" name="message" rows="5" required data-key="form-message-placeholder" placeholder="Xabaringizni yozing..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-key="form-submit-btn">Yuborish</button>
+                </form>
+                
+                <div class="contact-links-grid">
+                    <a href="https://t.me/Durbek_19" target="_blank" class="contact-link telegram-link">
+                        <span>💬</span> <span data-key="telegram-label">Telegram</span>
+                        <span class="contact-address">@Durbek_19</span>
+                    </a>
+                    <a href="mailto:malumnomalum973@gmail.com" class="contact-link gmail-link">
+                        <span>📧</span> <span data-key="gmail-label">Gmail</span>
+                        <span class="contact-address">malumnomalum973@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/durbekh" target="_blank" class="contact-link github-link">
+                        <span>🔗</span> <span data-key="github-label">GitHub</span>
+                        <span class="contact-address">github.com/durbekh</span>
+                    </a>
+                </div>
+                <p class="contact-note" data-key="contact-note">
+                    Barcha loyihalarim va kodlarim GitHubda ko'rinadi. Profilimga tashrif buyuring va yulduzcha qo'shing!
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" title="Tepaga chiqish">
+        <span>↑</span>
+    </button>
+
+    <!-- Mouse Trail Container -->
+    <canvas id="smoke-canvas"></canvas>
+
+    <!-- CSS-only Smoke Overlay (no JS) -->
+    <div class="css-smoke" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
