@@ -59,20 +59,91 @@ body {
     right: 100px;
     z-index: 1000;
     display: flex;
-    gap: 10px;
-    background: var(--card);
-    padding: 8px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.6s ease, box-shadow 0.6s ease;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
 }
 
-.lang-btn {
-    background: transparent;
+.language-selector.open {
+    pointer-events: auto;
+}
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 90px;
+    background: var(--card);
     border: 2px solid var(--border);
     color: var(--text);
-    padding: 10px 14px;
-    border-radius: 20px;
+    padding: 10px 16px;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.lang-toggle .flag {
+    display: block;
+    line-height: 1;
+}
+
+.lang-toggle:hover,
+.language-selector.open .lang-toggle {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.lang-toggle:hover .flag,
+.language-selector.open .lang-toggle .flag {
+    transform: scale(1.1);
+}
+
+.lang-toggle .caret {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.language-selector.open .lang-toggle .caret {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.6s ease, border-color 0.6s ease;
+}
+
+.language-selector.open .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.lang-option {
+    background: transparent;
+    border: 2px solid transparent;
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 14px;
@@ -80,29 +151,27 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    min-width: 60px;
-    justify-content: center;
-    position: relative;
+    justify-content: flex-start;
+    min-width: 120px;
 }
 
-.lang-btn .flag {
+.lang-option .flag {
     display: block;
-    line-height: 1;
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
-.lang-btn:hover {
+.lang-option:hover {
     background: var(--accent);
     color: white;
     border-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateX(-2px);
 }
 
-.lang-btn.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
+.lang-option:hover .flag {
+    transform: scale(1.1);
+}
+
+.lang-option.active {
+    display: none;
 }
 
 .flag {
@@ -134,12 +203,27 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect fill='%23FFFFFF' width='900' height='200'/%3E%3Crect fill='%230039A6' y='200' width='900' height='200'/%3E%3Crect fill='%23D52B1E' y='400' width='900' height='200'/%3E%3C/svg%3E");
 }
 
-.lang-btn:hover .flag {
+.lang-option:hover .flag,
+.lang-toggle:hover .flag,
+.language-selector.open .lang-toggle .flag {
     transform: scale(1.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.lang-btn.active .flag {
+.lang-option .flag,
+.lang-toggle .flag {
+    transition: transform 0.3s ease;
+}
+
+.lang-option .flag {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.language-selector.open .lang-option .flag {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.language-selector.open .lang-toggle .flag {
     transform: scale(1.1);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
@@ -1179,16 +1263,13 @@ html {
     }
     
     .language-selector {
-        flex-direction: column;
-        gap: 5px;
-        padding: 6px;
+        right: 20px;
     }
     
-    .lang-btn {
-        padding: 8px 10px;
+    .lang-toggle {
+        padding: 8px 12px;
         font-size: 12px;
-        min-width: auto;
-        width: 50px;
+        min-width: 70px;
     }
     
     .lang-text {

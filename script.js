@@ -170,17 +170,123 @@ const translations = {
 // Current language
 let currentLang = localStorage.getItem('language') || 'uz';
 
+let langToggle;
+let langDropdown;
+let langOptions = [];
+
+function setupLanguageDropdown() {
+    langToggle = document.getElementById('lang-toggle');
+    langDropdown = document.getElementById('lang-dropdown');
+    langOptions = langDropdown ? Array.from(langDropdown.querySelectorAll('.lang-option')) : [];
+
+    if (!langToggle || !langDropdown || langOptions.length === 0) {
+        return;
+    }
+
+    langToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleDropdown();
+    });
+
+    langOptions.forEach(option => {
+        option.addEventListener('click', (event) => {
+            event.stopPropagation();
+            triggerLanguageParticles(option);
+            const lang = option.dataset.lang;
+            if (lang) {
+                updateLanguage(lang);
+            }
+        });
+    });
+
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('keydown', handleEscapeKey);
+
+    setActiveLanguageOption(currentLang);
+}
+
+function setActiveLanguageOption(lang) {
+    if (!langToggle || !langOptions || langOptions.length === 0) {
+        return;
+    }
+
+    let activeOption = null;
+
+    langOptions.forEach(option => {
+        const isActive = option.dataset.lang === lang;
+        option.classList.toggle('active', isActive);
+        if (isActive) {
+            activeOption = option;
+        }
+    });
+
+    if (!activeOption) {
+        return;
+    }
+
+    const toggleFlag = langToggle.querySelector('.flag');
+    const toggleText = langToggle.querySelector('.lang-text');
+    const optionFlag = activeOption.querySelector('.flag');
+    const label = activeOption.dataset.label || (toggleText ? toggleText.textContent.trim() : '');
+    const title = activeOption.dataset.title || activeOption.getAttribute('title') || label;
+
+    if (toggleFlag && optionFlag) {
+        toggleFlag.className = optionFlag.className;
+    }
+
+    if (toggleText && label) {
+        toggleText.textContent = label;
+    }
+
+    if (title) {
+        langToggle.setAttribute('title', title);
+    }
+}
+
+function toggleDropdown() {
+    if (!langToggle) return;
+    const container = langToggle.parentElement;
+    if (!container) return;
+    const isOpen = container.classList.toggle('open');
+    langToggle.setAttribute('aria-expanded', String(isOpen));
+}
+
+function closeDropdown() {
+    if (!langToggle) return;
+    const container = langToggle.parentElement;
+    if (!container || !container.classList.contains('open')) return;
+    container.classList.remove('open');
+    langToggle.setAttribute('aria-expanded', 'false');
+}
+
+function handleOutsideClick(event) {
+    if (!langToggle) return;
+    const container = langToggle.parentElement;
+    if (!container) return;
+    if (!container.contains(event.target)) {
+        closeDropdown();
+    }
+}
+
+function handleEscapeKey(event) {
+    if (event.key === 'Escape') {
+        closeDropdown();
+    }
+}
+
+function triggerLanguageParticles(target) {
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    for (let i = 0; i < 15; i++) {
+        createParticle(centerX, centerY);
+    }
+}
+
 // Initialize language
 function initLanguage() {
     updateLanguage(currentLang);
-    
-    // Set active language button
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.lang === currentLang) {
-            btn.classList.add('active');
-        }
-    });
 }
 
 // Function to fade out all animated elements
@@ -259,6 +365,9 @@ function updateLanguage(lang) {
         document.documentElement.setAttribute('lang', lang);
     }
     
+    setActiveLanguageOption(lang);
+    closeDropdown();
+    
     // Fade out all elements
     fadeOutAllElements();
     
@@ -294,25 +403,6 @@ function updateLanguage(lang) {
         fadeInAllElements();
     }, 500);
 }
-
-// Language button event listeners
-document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const lang = btn.dataset.lang;
-        updateLanguage(lang);
-        
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Create smoke effect on language change
-        const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        for (let i = 0; i < 15; i++) {
-            createParticle(centerX, centerY);
-        }
-    });
-});
 
 // Theme Management
 const themeToggle = document.getElementById('theme-toggle');
@@ -906,6 +996,7 @@ function initScrollToTop() {
 // Initialize everything when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        setupLanguageDropdown();
         initLanguage();
         // Initialize smoke effect with small delay to ensure canvas is ready
         setTimeout(() => {
@@ -919,6 +1010,7 @@ if (document.readyState === 'loading') {
         }
     });
 } else {
+    setupLanguageDropdown();
     // DOM is already ready
     initLanguage();
     // Initialize smoke effect with small delay to ensure canvas is ready
